@@ -2,6 +2,6 @@
 <html lang="en">
     <head></head>
     <body>
-        At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near {{ object.location.title() }} in {{ object.Neighborhood }}.
+        At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near {{ object.location.title().replace("And","&") }} in {{ object.Neighborhood }}.
     </body>
 </html>
