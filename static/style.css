@@ -28,6 +28,37 @@ h1 {
     text-shadow: 0.3px 0.3px 0px gray;
     letter-spacing: .01em;
 }
+
+h2{
+    font-size: 26.5px;
+    font-style: oblique;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+h4{
+    font-size: 18px;
+    color: gray;
+    margin-top: 0px;
+    padding-top: 0px;
+    font-style: italic;
+    font-weight: 100;
+}
+
+#help-box{
+    width: 85%;
+    margin: 0 auto;
+    text-align: right;
+}
+
+#help-box ul{
+    list-style-type: none;
+}
+
+#nine11 {
+    color: red;
+}
+
 .byline {
     margin: 6px 0 0 0;
     font-size: 13px;
