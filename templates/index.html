@@ -5,6 +5,9 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
         <script src="{{ url_for('static', filename='leaflet-heat.js') }}"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script type="text/javascript" src="https://www.unpkg.com/jquery@3.6.3/dist/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     </head>
     <body>
         <nav>
@@ -20,7 +23,8 @@
         </header>
         <div id="map" style="width:100%; height:400px;"></div>
         
-        <table border=1 cellpadding=7>
+        <table border=1 cellpadding=7 id="table_id" class="display">
+            <thead>
             <tr>
                 <th>Call Number</th>
                 <th>Date</th>
@@ -28,6 +32,8 @@
                 <th>Location</th>
                 <th>Neighborhood</th>
             </tr>
+            </thead>
+            <tbody>
             {% for obj in object_list %}
             <tr>
                 <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
@@ -37,6 +43,7 @@
                 <td>{{ obj.Neighborhood }}</td>
             </tr>
             {% endfor %}
+        </tbody>
         </table>
         <script type="text/javascript">
             var map = L.map('map').setView([39.3, -76.5], 11);
