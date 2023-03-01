@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+        <script src="{{ url_for('static', filename='leaflet-heat.js') }}"></script>
     </head>
     <body>
         <nav>
@@ -17,7 +18,7 @@
                 By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
             </div>
         </header>
-        <div id="map" style="width:100%; height:300px;"></div>
+        <div id="map" style="width:100%; height:400px;"></div>
         
         <table border=1 cellpadding=7>
             <tr>
@@ -52,33 +53,11 @@
         }
             var data = [
             {% for obj in object_list %}
-            {
-              "type": "Feature",
-              "properties": {
-                "full_name": "{{ obj.location }}",
-                "id": "{{ obj.callNumber }}",
-                "popupContent": "{{ obj.incidentLocation }}",
-                "show_on_map": true
-              },
-              "geometry": {
-                "type": "Point",
-                "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
-              }
-            }{% if not loop.last %},{% endif %}
+                L.latLng({{ obj.lat }}, {{ obj.lng }})
+            {% if not loop.last %},{% endif %}
             {% endfor %}
           ];
-          var blackIcon = L.Icon.extend({
-                options: {
-                    iconUrl: "{{ url_for('static', filename='marker-24.png') }}",
-                    iconSize: [24, 24]
-                }
-            });
-            L.geoJSON(data, {
-                pointToLayer: function (feature, latlng) {
-                    return L.marker(latlng, {icon: new blackIcon()});
-                },
-                onEachFeature: onEachFeature
-            }).addTo(map);
+        var heat = L.heatLayer(data, {radius: 25}).addTo(map);
         </script>
     </body>
 </html>
